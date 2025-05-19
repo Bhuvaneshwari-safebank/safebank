@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - New Transaction</title>
+
+    <!-- Embedded CSS -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 { color: #1b4de4; margin-bottom: 20px; }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], input[type="number"], button {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1b4de4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #163fc0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Send Money</h1>
+
+    <form action="/new_transaction" method="POST">
+        <input type="text" name="receiver" placeholder="Receiver's Email or Phone" required>
+        <input type="number" name="amount" placeholder="Amount in ₹" required>
+        <button type="submit">Send Money</button>
+    </form>
+
+    <a href="/dashboard" style="color:#1b4de4; text-decoration:underline;">Back to Dashboard</a>
+</div>
+
+</body>
+</html>

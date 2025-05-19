@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - Profile</title>
+
+    <!-- Embedded CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #1b4de4;
+            margin-bottom: 20px;
+        }
+        .info {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #1b4de4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #163fc0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Your Profile</h1>
+
+    <div class="info">
+        <p><strong>Name:</strong> {{ user['name'] }}</p>
+        <p><strong>Email:</strong> {{ user['email'] }}</p>
+        <p><strong>Phone:</strong> {{ user['phone'] }}</p>
+    </div>
+
+    <a href="/update_profile" class="btn">Update Profile</a>
+    <a href="/delete_account" class="btn" style="background-color:red;">Delete My Account</a>
+
+    <a href="/dashboard" class="btn" style="background-color: #6c757d;">Back to Dashboard</a>
+</div>
+
+<!-- No JS needed -->
+
+</body>
+</html>

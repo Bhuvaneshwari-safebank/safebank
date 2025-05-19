@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - Update Profile</title>
+
+    <!-- Embedded CSS -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 { color: #1b4de4; margin-bottom: 20px; }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], button {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1b4de4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #163fc0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Update Profile</h1>
+
+    <form action="/update_profile" method="POST">
+        <input type="text" name="name" value="{{ user['name'] }}" placeholder="Enter New Name" required>
+        <input type="text" name="phone" value="{{ user['phone'] }}" placeholder="Enter New Phone" required>
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="/dashboard" style="color:#1b4de4; text-decoration:underline;">Back to Dashboard</a>
+</div>
+
+</body>
+</html>

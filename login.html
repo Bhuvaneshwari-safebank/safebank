@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - Login</title>
+
+    <!-- Embedded CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 450px;
+            margin: 60px auto;
+            padding: 25px 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1b4de4;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"],
+        input[type="password"],
+        button {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1b4de4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #163fc0;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 25px;
+            top: 53%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .flash-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .flash-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    }
+
+    .alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>SafeBank Login</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+    <form action="/" method="POST">
+
+        <label for="email_or_phone">Email or Phone</label>
+        <input type="text" id="email_or_phone" name="email_or_phone" placeholder="Enter Email or Phone" required>
+
+        <label for="password">Password</label>
+        <div style="position: relative;">
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
+            <span id="eyeIcon" class="eye-icon" onclick="togglePassword('password','eyeIcon')">👁️</span>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p style="text-align:center; margin-top: 15px;">
+        New user? <a href="/register">Register here</a>
+    </p>
+</div>
+
+<!-- Embedded JS -->
+<script>
+    // Password Eye Toggle
+    function togglePassword(id, eyeId) {
+        var passwordInput = document.getElementById(id);
+        var eyeIcon = document.getElementById(eyeId);
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.textContent = "🙈";
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.textContent = "👁️";
+        }
+    }
+    setTimeout(function() {
+    var flashes = document.querySelectorAll('.flash-success, .flash-error');
+    flashes.forEach(function(flash) {
+      flash.style.display = 'none';
+    });
+  }, 1000); // hides after 1000ms = 1 second
+</script>
+
+</body>
+</html>

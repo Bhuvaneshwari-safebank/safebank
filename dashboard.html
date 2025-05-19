@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - Dashboard</title>
+
+    <!-- Embedded CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #1b4de4;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #1b4de4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #163fc0;
+        }
+    </style>
+</head>
+<body>
+ 
+    <!--<div style="background:#fff3cd; padding:10px; border-left:4px solid #ffc107; margin-bottom:15px;">
+        ⚠️ Your recent transaction was flagged as suspicious. Please review 
+        <a href="/transaction_history">here</a>.
+    </div>-->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<div class="container">
+    <h1>Welcome, {{ username }}!</h1>
+
+    <a href="/profile" class="btn">View Profile</a>
+    <a href="/new_transaction" class="btn">New Transaction</a>
+    <a href="/transaction_history" class="btn">Transaction History</a>
+    <a href="/check_balance" class="btn">Check Balance</a>
+    <a href="/logout" class="btn" style="background-color: #d9534f;">Logout</a>
+</div>
+
+<!-- No JS needed in this page -->
+
+</body>
+</html>

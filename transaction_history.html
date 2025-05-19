@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - Transaction History</title>
+    <style>
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #1b4de4;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        h1 {
+            text-align: center;
+            color: #1b4de4;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #1b4de4;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Transaction History</h1>
+
+{% if transactions %}
+    <table>
+        <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for txn in transactions %}
+            <tr>
+                <td>{{ txn['sender_email'] }}</td>
+                <td>{{ txn['receiver_email'] }}</td>
+                <td>₹{{ txn['amount'] }}</td>
+                <td>{{ txn['status'] | upper }}</td>
+                <td>{{ txn['time'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="text-align:center; color:gray; margin-top:20px;">No transactions found yet.</p>
+{% endif %}
+
+
+<a href="/dashboard" class="btn" style="background-color: #6c757d;">Back to Dashboard</a>
+
+</body>
+</html>

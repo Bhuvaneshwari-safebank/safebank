@@ -1,0 +1,10 @@
+Flask
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+email-validator
+requests
+gunicorn
+waitress

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: safebank
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SMTP_EMAIL
+        value: safebank.secure@gmail.com
+      - key: SMTP_PASSWORD
+        value: Bhuvana@2004

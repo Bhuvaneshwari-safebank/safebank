@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - Check Balance</title>
+    <style>
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 400px;
+        }
+        h1 {
+            color: #1b4de4;
+            margin-bottom: 20px;
+        }
+        input[type="password"], button {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1b4de4;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #163fc0;
+        }
+        .balance {
+            font-size: 22px;
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #1b4de4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Check Balance</h1>
+
+    {% if balance %}
+        <div class="balance">₹{{ balance }}</div>
+    {% else %}
+    <form action="/check_balance" method="POST">
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">View Balance</button>
+    </form>
+    {% endif %}
+
+    <a href="/dashboard" class="btn" style="background-color: #6c757d;">Back to Dashboard</a>
+</div>
+
+</body>
+</html>

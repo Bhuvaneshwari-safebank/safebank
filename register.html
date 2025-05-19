@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SafeBank - Register</title>
+
+    <!-- Embedded CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f2f6fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 25px 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1b4de4;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        button {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1b4de4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #163fc0;
+        }
+        .eye-icon {
+            position: absolute;
+            right: 25px;
+            top: 53%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .flash-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .flash-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        #strengthText {
+            margin-top: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Register</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/register" method="POST">
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter Full Name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter Email" required>
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" placeholder="Enter Phone" required>
+
+        <label for="password">Password</label>
+        <div style="position: relative;">
+            <input type="password" id="password" name="password" onkeyup="checkPasswordStrength()" placeholder="Create Password" required>
+            <span id="eyeIcon1" class="eye-icon" onclick="togglePassword('password','eyeIcon1')">👁️</span>
+        </div>
+        <div id="strengthText"></div>
+
+        <label for="confirm_password">Confirm Password</label>
+        <div style="position: relative;">
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            <span id="eyeIcon2" class="eye-icon" onclick="togglePassword('confirm_password','eyeIcon2')">👁️</span>
+        </div>
+
+        <label for="captcha_real">Captcha</label>
+        <input type="text" value="{{ captcha }}" name="captcha_real" readonly style="background: #eee;">
+
+        <label for="captcha_entered">Enter Captcha</label>
+        <input type="text" id="captcha_entered" name="captcha_entered" placeholder="Enter Captcha" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p style="text-align:center; margin-top: 15px;">
+        Already have an account? <a href="/">Login here</a>
+    </p>
+</div>
+
+<!-- Embedded JS -->
+<script>
+    // Password Eye Toggle
+    function togglePassword(id, eyeId) {
+        var passwordInput = document.getElementById(id);
+        var eyeIcon = document.getElementById(eyeId);
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.textContent = "🙈";
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.textContent = "👁️";
+        }
+    }
+
+    // Password Strength Check
+    function checkPasswordStrength() {
+        var password = document.getElementById("password").value;
+        var strengthText = document.getElementById("strengthText");
+
+        var strongRegex = new RegExp("^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})");
+
+        if (strongRegex.test(password)) {
+            strengthText.innerHTML = "Strong Password ✅";
+            strengthText.style.color = "green";
+        } else {
+            strengthText.innerHTML = "Weak Password ❌";
+            strengthText.style.color = "red";
+        }
+    }
+    setTimeout(function() {
+    var flashes = document.querySelectorAll('.flash-success, .flash-error');
+    flashes.forEach(function(flash) {
+      flash.style.display = 'none';
+    });
+  }, 1000); // hides after 1000ms = 1 second
+</script>
+
+</body>
+</html>
